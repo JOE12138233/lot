@@ -25,7 +25,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define PRODUCT_ID 0x0514 /* USB PID */
 #define DEVICE_VER 0x0001 /* 硬件版本 */
 #define MANUFACTURER "Lotlab" /* 硬件制造商，用于蓝牙显示 */
-#define PRODUCT "LKB-Core" /* 硬件名称，用于USB和蓝牙显示 */
+#define PRODUCT "free65" /* 硬件名称，用于USB和蓝牙显示 */
 #define MACADDR_SEPRATOR '_' /* 蓝牙名称后地址的分隔符。若不设置则不显示蓝牙名称后面的地址 */
 
 /* USB HID report parameter */
@@ -33,7 +33,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define NKRO_EPSIZE 28 /* 键盘NKRO端点大小，请不要修改 */
 
 /* key matrix size */
-#define MATRIX_ROWS 6 /* 硬件阵列行数 */
+#define MATRIX_ROWS 5 /* 硬件阵列行数 */
 #define MATRIX_COLS 16 /* 硬件阵列列数 */
 
 /* define if matrix has ghost */
@@ -72,6 +72,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // 启用看门狗
 #define ENABLE_WATCHDOG
 
+//#define MULTI_DEVICE_SWITCH
 // 启用keymap存储
 #define KEYMAP_STORAGE
 #define MACRO_STORAGE /* 启用宏存储功能 */
@@ -90,15 +91,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //#define NO_ACTION_FUNCTION
 
 // LED 配置
-#define LED_NUM 22
-#define LED_CAPS 23
+#define LED_NUM 0
+//#define LED_CAPS 23
 // #define LED_SCLK 23
 #define LED_POSITIVE // LED上拉驱动
 
 // USB UART 传输配置
 #define HAS_USB // 启用与CH554的通信支持
-#define UART_RXD 27 // UART_RX口IO
-#define UART_TXD 26 // UART_TX口IO
+#define UART_RXD 30 // UART_RX口IO
+#define UART_TXD 31 // UART_TX口IO
 // #define UART_DET 19 // UART 检测引脚，若此脚被拉低，则说明USB正在工作。若不配置则使用RX口作为检测引脚
 #define UART_BAUDRATE NRF_UART_BAUDRATE_115200 // 通信波特率，请不要修改
 
@@ -110,7 +111,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define PIN_STANDBY !UCC2 // CH554的充电检测。当UCC2拉低时表示充电完成。若不配置则只使用PIN_CHARGING作为是否充电的检测标志
 
 // 按键阵列配置
-static const uint8_t row_pin_array[MATRIX_ROWS] = { 9, 8, 7, 6, 5, 4 };
-static const uint8_t column_pin_array[MATRIX_COLS] = { 3, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 30, 29, 28, 25, 24 };
+static const uint8_t row_pin_array[MATRIX_ROWS] = { 12, 11, 10, 9, 3 };
+static const uint8_t column_pin_array[MATRIX_COLS] = { 25, 26, 27, 28, 29, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24 };
 
 #define ROW_IN // 键盘阵列的二极管方向是从COL->ROW
