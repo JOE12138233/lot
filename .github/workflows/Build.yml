@@ -40,5 +40,5 @@ jobs:
       with:
         name: LotKB_Keyboard_Firmware
         path: |
-          /home/runner/work/lot/lot/keyboard/*.zip
-          /home/runner/work/lot/lot/keyboard/*.hex
+          /home/runner/work/JOE12138233/lot/keyboard/*.zip
+          /home/runner/work/JOE12138233/lot/keyboard/*.hex
