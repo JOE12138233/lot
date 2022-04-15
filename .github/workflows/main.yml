@@ -1,0 +1,44 @@
+name: Build ALL 
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build all keyboard
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Get source
+      uses: actions/checkout@v2
+      with:
+        submodules: recursive
+    - name: Install Tools
+      run: |
+        sudo apt-get update
+        sudo apt-get -y install python3-pip python3-setuptools
+        sudo pip3 install --upgrade pip
+        sudo pip3 install nrfutil
+        wget https://sourceforge.net/projects/sdcc/files/sdcc-linux-amd64/4.0.0/sdcc-4.0.0-amd64-unknown-linux2.5.tar.bz2 -O /tmp/sdcc-4.0.0-amd64-unknown-linux2.5.tar.bz2
+        tar xf /tmp/sdcc-4.0.0-amd64-unknown-linux2.5.tar.bz2 -C /tmp
+        sudo cp -r /tmp/sdcc-4.0.0/* /usr/local
+        wget https://developer.arm.com/-/media/Files/downloads/gnu-rm/9-2019q4/gcc-arm-none-eabi-9-2019-q4-major-x86_64-linux.tar.bz2 -O /tmp/gcc-arm-none-eabi-9-2019-q4-major-x86_64-linux.tar.bz2
+        tar xf /tmp/gcc-arm-none-eabi-9-2019-q4-major-x86_64-linux.tar.bz2 -C /tmp
+        wget https://github.com/genokolar/nrf52_tools/raw/main/mergehex -O /tmp/mergehex
+        sudo cp -r /tmp/mergehex /usr/local/bin/mergehex
+        sudo chmod 0755 /usr/local/bin/mergehex
+        echo GNU_INSTALL_ROOT := /tmp/gcc-arm-none-eabi-9-2019-q4-major/bin/>template/Makefile.posix
+        echo GNU_VERSION := 9.2.1>>template/Makefile.posix
+        echo GNU_PREFIX := arm-none-eabi>>template/Makefile.posix
+    - name: Make
+      run: |
+        cd keyboard
+        make -j4
+        cd ../
+    - name: Upload Artifact Files
+      uses: actions/upload-artifact@v2
+      with:
+        name: LotKB_Keyboard_Firmware
+        path: |
+          /home/runner/work/nrf52-keyboard/nrf52-keyboard/keyboard/_build/*.zip
+          /home/runner/work/nrf52-keyboard/nrf52-keyboard/keyboard/_build/*.hex
