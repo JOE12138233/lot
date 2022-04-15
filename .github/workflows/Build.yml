@@ -40,5 +40,5 @@ jobs:
       with:
         name: LotKB_Keyboard_Firmware
         path: |
-          /home/runner/work/lot/nrf52-keyboard/keyboard/_build/*.zip
-          /home/runner/work/lot/nrf52-keyboard/keyboard/_build/*.hex
+          /home/runner/work/lot/keyboard/_build/*.zip
+          /home/runner/work/lot/keyboard/_build/*.hex
